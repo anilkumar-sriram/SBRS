@@ -1,0 +1,46 @@
+<!DOCTYPE html>    
+<html>    
+<head>
+<title> Home Page</title>
+<head>   
+<body>
+<h1>Sentiment Based Recommendation System
+    <br>
+    <b>-------------------------------------------------------</b></h1>
+<body>
+<form action= '' method= 'post'>
+  <p>
+   <h2><label>Enter User Name</label>
+   <input type= 'text' name= 'user_name'/></h2>
+   <b><i> Note: Enter username which is present in Sample30.csv Dataset</i></b>
+  </p>
+  <p> <input type= 'submit' value= 'submit'/> </p>
+  <b><i><p>Algo would fetch TOP5 recommendation items for the given user. Since NLP processing and sentiment based model run in the background,  some time it might
+      take around 5 to 6 minutes to pop up the recommendation list  </p></i></b>
+    <br>
+  <p>
+  <b><label>Top1 Item: </label>
+      <label>{{ prod1 }} </label>
+   <br>
+   <br>
+   <label>Top2 Item:</label>
+      <label>{{ prod2 }} </label>
+   <br>
+   <br>
+   <label>Top3 Item: </label>
+      <label>{{ prod3 }} </label>
+   <br>
+   <br>
+   <label>Top4 Item: </label>
+      <label>{{ prod4 }} </label>
+   <br>
+   <br>
+   <label>Top5 Item: </label>
+      <label>{{ prod5 }} </label></b>
+   <br>
+   <br>
+  </p>
+</form> 
+<br>
+<br>
+</html>   
