@@ -14,7 +14,7 @@ lemmatizer = nltk.stem.WordNetLemmatizer()
 
 
 def fetch_all_reviews_for_the_given_products(df, product_list):
-    df = pd.read_csv(r'./dataset/sample30.csv', low_memory=False)
+    #df = pd.read_csv(r'./dataset/sample30.csv', low_memory=False)
     common_df = df[df.name.isin(product_list)]
     return common_df
 

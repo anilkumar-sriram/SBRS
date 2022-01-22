@@ -3,13 +3,20 @@ from flask import Flask, render_template, request, redirect, url_for
 from utils import *
 import pickle
 import warnings
-
-
-
+from os.path import exists
 warnings.filterwarnings("ignore")
 
 app = Flask(__name__)  # intitialize the flaks app  # common
-df = pd.read_csv(r'./dataset/sample30.csv', low_memory=False)
+
+if exists('dataset/sample30_lemma.csv'):
+    df = pd.read_csv(r'./dataset/sample30_lemma.csv', low_memory=False)
+else:
+    df = pd.read_csv(r'./dataset/sample30.csv', low_memory=False)
+    df = apply_pre_processing_on_df(df)
+    df = apply_nlp_processing_on_df(df)
+    #### Create sample30_lemma file so it avoids processing the data from second time onwards
+    df.to_csv('./dataset/sample30_lemma.csv')
+
 
 #### Load the recommendation, word_vector and sentiment models
 sentiment_model = pickle.load(open("./pickle/sentiment_model.pkl", 'rb'))
@@ -28,8 +35,6 @@ def home():
         top20_product_list = list(user_recommendation_df.loc[user_input].sort_values(ascending=False)[0:20].index)
         print(top20_product_list)
         top20_df = fetch_all_reviews_for_the_given_products(df, top20_product_list)
-        top20_df = apply_pre_processing_on_df(top20_df)
-        top20_df = apply_nlp_processing_on_df(top20_df)
         top20_df["user_sentiment"] = predict_sentiment_on_reviews(word_vectorizer, sentiment_model,
                                                                   top20_df["reviews_text_title"].tolist())
         top5_product_list = get_top5_product_list(top20_df)
